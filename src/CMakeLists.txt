@@ -12,7 +12,5 @@ add_library(Vertigo STATIC
 )
 
 #link with SFML
-find_package(SFML 2.5 
-  COMPONENTS 
-    system window graphics network audio REQUIRED)
-target_link_libraries(Vertigo -lsfml-graphics -lsfml-window -lsfml-system Impact)
+find_package(SFML 3.0 REQUIRED COMPONENTS System Window Graphics Network Audio)
+target_link_libraries(Vertigo PRIVATE SFML::Graphics SFML::Window SFML::System Impact)

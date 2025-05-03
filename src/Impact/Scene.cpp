@@ -75,7 +75,7 @@ namespace Impact
 				float radius = bodyShape->radius;
 				circle.setRadius(radius);
 				Impact::Vec2 pos = b->position;
-				circle.setPosition(pos.x - radius, pos.y - radius); //-pos.y ? because sfml y+ is down?
+				circle.setPosition({pos.x - radius, pos.y - radius}); //-pos.y ? because sfml y+ is down?
 				window->draw(circle);
 			}
 			else 	//Polygons

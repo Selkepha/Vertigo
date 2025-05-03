@@ -12,7 +12,7 @@ class Game : public App
 
 	void OnStart()
 	{
-		window = new sf::RenderWindow(sf::VideoMode(800, 600), "SFML works!");
+		window = new sf::RenderWindow(sf::VideoMode({800, 600}), "SFML works!");
 
 		//Shapes
 		std::vector<Impact::Vec2> vertices = {
@@ -40,14 +40,20 @@ class Game : public App
 
 	void OnUpdate()
 	{
-		//poll events
-		sf::Event event;
-		while(window->pollEvent(event))
+		while(window->isOpen())
 		{
-			if(event.type == sf::Event::Closed)
-			{
-				Quit();
-			}
+			while (const std::optional event = window->pollEvent())
+    		{
+        		if (event->is<sf::Event::Closed>())
+        		{
+        		    window->close();
+        		}
+        		else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+        		{
+        		    if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
+        		        window->close();
+        		}
+    		}
 		}
 	}
 
